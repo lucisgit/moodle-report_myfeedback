@@ -221,7 +221,7 @@ class report_myfeedback {
     /**
      * Gets whether or not the module is installed and visible
      *
-     * @param str $modname The name of the module
+     * @param string $modname The name of the module
      * @return bool true if the module exists and is not hidden in the site admin settings,
      *         otherwise false
      */
@@ -1756,22 +1756,22 @@ class report_myfeedback {
      */
     public function get_all_assessments($cid) {
         global $remotedb;
-        $now = time();
+
         $items = array('turnitintool', 'turnitintooltwo', 'workshop', 'quiz', 'assign');
         foreach ($items as $key => $item) {
             if (!$this->mod_is_available($item)) {
                 unset($items[$key]);
             }
         }
-        $items = '"' . implode('","', $items) . '"';
+        list($modsql, $params) = $remotedb->get_in_or_equal($items, SQL_PARAMS_NAMED);
         $sql = "SELECT id, itemname, itemtype, itemmodule
                 FROM {grade_items} gi 
-                WHERE (hidden != 1 AND hidden < ?) AND courseid = ?
-                AND (itemmodule IN ($items) OR (itemtype = 'manual'))";
-        $params = array($now, $cid);
-        $assess = $remotedb->get_records_sql($sql, $params);
+                WHERE (hidden != 1 AND hidden < :now) AND courseid = :cid
+                AND (itemmodule $modsql OR (itemtype = 'manual'))";
+        $params['now'] = time();
+        $params['cid'] = $cid;
 
-        return $assess;
+        return $remotedb->get_records_sql($sql, $params);
     }
 
     /**

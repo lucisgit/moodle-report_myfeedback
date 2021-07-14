@@ -1108,10 +1108,6 @@ div.dt-button-background {
   }
 }
 
-.disabled {
-    color: #999;
-}
-
 /*hiding the unix date that is used to sort the data, even when expanded
 also the blank invisible column that shows up on ColVis hide/Show list*/
 /*.path-report-myfeedback tr.child>td.child>ul>li:last-child,
@@ -1459,15 +1455,6 @@ div.dt-button-collection a.dt-button:active:not(.disabled), div.dt-button-collec
      box-shadow: inset 1px 1px 3px #666;  
  }
 
- a {
-     color: #005E8D;
-     text-decoration: none;
- }
-
- a, a:visited {
-     color: #005E8D;
- }
- 
 .path-report-myfeedback .modal {
     position: fixed;
     top: 10%;

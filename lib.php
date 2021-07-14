@@ -285,19 +285,18 @@ class report_myfeedback {
      */
     public function has_workshop_feedback_file($userid, $subid) {
         global $remotedb;
+
         // Is there any feedback file?
-        $sql = "SELECT DISTINCT max(wa.id) as id, wa.feedbackauthorattachment
-                FROM {workshop_assessments} wa 
-                JOIN {workshop_submissions} ws ON wa.submissionid=ws.id 
-                AND ws.authorid=? AND ws.id=? and ws.example = 0";
+        $sql = "SELECT *
+                  FROM {workshop_assessments} wa
+                  JOIN {workshop_submissions} ws ON ws.id = wa.submissionid
+                   AND ws.authorid = ?
+                   AND ws.id = ?
+                   AND ws.example = 0
+                 WHERE wa.feedbackauthorattachment <> 0";
         $params = array($userid, $subid);
-        $feedbackfile = $remotedb->get_record_sql($sql, $params);
-        if ($feedbackfile) {
-            if ($feedbackfile->feedbackauthorattachment != 0) {
-                return true;
-            }
-        }
-        return false;
+
+        return $remotedb->record_exists_sql($sql, $params);
     }
 
     /**

@@ -130,8 +130,10 @@ $string['fullfeedback'] = 'view full feedback';
 $string['programme'] = 'Second level: ';
 $string['userprogramme'] = 'Programme: ';
 $string['faculty'] = 'Top level: ';
-$string['studentrecordsystem'] = 'Launch Student Record System';
-$string['studentrecordsystemlink'] = 'https://';
+$string['studentrecordsystem'] = 'Student Records System';
+$string['studentrecordsystemlaunch'] = 'Launch Student Records System';
+$string['studentrecordsystemurl'] = 'Student Records System URL';
+$string['studentrecordsystemurl_desc'] = 'If a URL is provided, a link to the Student Records System will be printed on various pages.';
 $string['provisional_grades'] = 'The marks shown here are provisional and may include marks for assessments that do not count towards your final grade. Please refer to the
     <a href="" title="Student Record System login" rel="tooltip">student record system</a> to see a formal record of your grade.';
 $string['archivedbnotexist'] = "This database does not exist or access details incorrect. Admin must configure My feedback report settings page correctly!";

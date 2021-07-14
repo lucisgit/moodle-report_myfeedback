@@ -50,7 +50,12 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_heading('report_myfeedback_addheading_overviewlimit',get_string('overviewlimitheading', 'report_myfeedback'),''));
     $settings->add(new admin_setting_configtext('report_myfeedback/overviewlimit', get_string('overviewlimit', 'report_myfeedback'),
             get_string('overviewlimitsettings', 'report_myfeedback'), 10, PARAM_INT));
-    
+
+    // Student records system config.
+    $settings->add(new admin_setting_heading('report_myfeedback_addheading_srs',get_string('studentrecordsystem', 'report_myfeedback'),''));
+    $settings->add(new admin_setting_configtext('report_myfeedback/srsurl', get_string('studentrecordsystemurl', 'report_myfeedback'),
+            get_string('studentrecordsystemurl_desc', 'report_myfeedback'), '', PARAM_URL));
+
         //Late feedback Settings - 
     /*$settings->add(new admin_setting_heading('report_myfeedback_addheading_latefeedback',get_string('latefeedbackheading', 'report_myfeedback'),''));
     $settings->add(new admin_setting_configtext('report_myfeedback/latefeedback', get_string('latefeedback', 'report_myfeedback'),

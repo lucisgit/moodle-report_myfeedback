@@ -182,8 +182,15 @@ $event->trigger();
 
 echo '<div class="personaltutoremails"><span class="personaltutoremail ex_port"><a href="#">' . get_string('export_to_excel', 'report_myfeedback') . '</a></span>
     <span class="personaltutoremail reportPrint"  title="'.get_string('print_msg', 'report_myfeedback').'" rel="tooltip"><a href="#">' . get_string('print_report', 'report_myfeedback') . 
-        '</a><img id="reportPrint" src="' . 'pix/info.png' . '" ' . ' alt="-"/></span><p class="personaltutoremail"><a href="' .
- get_string("studentrecordsystemlink", "report_myfeedback") . '" target="_blank">' . get_string("studentrecordsystem", "report_myfeedback") . '</a></p></div></div>';
+        '</a><img id="reportPrint" src="' . 'pix/info.png' . '" ' . ' alt="-"/></span>';
+if ($srsurl = get_config('report_myfeedback', 'srsurl')) {
+    $url = new moodle_url($srsurl);
+    $srslink = html_writer::start_tag('p', ['class' => 'personaltutoremail']);
+    $srslink .= html_writer::link($url, get_string('studentrecordsystemlaunch', 'report_myfeedback'), ['target' => '_blank']);
+    $srslink .= html_writer::end_tag('p');
+    echo $srslink;
+}
+echo '</div></div>';
 echo '<form method="POST" id="emailform" action="">';
 echo $tutortable;
 echo '</form>';

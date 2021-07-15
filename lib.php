@@ -1165,23 +1165,31 @@ class report_myfeedback {
 
     /**
      * Return whether the user has the capability in any context
-	 *
-     * @global stdClass $remotedb DB object
-     * @param uid The user id
-     * @param cap The capability to check for
-     * @return true or false
+     *
+     * @param int $userid The user id
+     * @param string $capability The capability to check for
+     * @param int $contextid The context id to check
+     * @return bool True if user has capability or false
      */
-    public function get_dashboard_capability($uid, $cap, $context = NULL) {
+    public function get_dashboard_capability($userid, $capability, $contextid = 0) {
         global $remotedb;
-        $sql = "SELECT DISTINCT min(c.id) as id, r.roleid FROM {role_capabilities} c
-            JOIN {role_assignments} r ON r.roleid=c.roleid ";
-        if ($context) {
-            $sql .= "AND r.contextid = $context ";
+
+        $sql = "SELECT *
+                  FROM {role_capabilities} c
+                  JOIN {role_assignments} a ON a.roleid = c.roleid
+                   AND a.contextid = c.contextid
+                 WHERE a.userid = :userid
+                   AND c.capability = :capability";
+        $params = [
+            'userid'     => $userid,
+            'capability' => $capability
+        ];
+        if (!empty($contextid)) {
+            $sql .= " AND a.contextid = :contextid";
+            $params['contextid'] = $contextid;
         }
-        $sql .= "AND userid = ? AND capability = ? GROUP BY c.id, r.roleid";
-        $params = array($uid, $cap);
-        $capy = $remotedb->get_record_sql($sql, $params);
-        return $capy ? $capy->roleid : 0;
+
+        return $remotedb->record_exists_sql($sql, $params);
     }
 	
     /**

@@ -380,32 +380,6 @@
     text-align: center;
 }
 
-/*The Feedback heading and tabs*/
-.path-report-myfeedback .heading h2 {
-    margin: 0;
-    margin-bottom: 10px;
-    padding-left: 10px;
-    background: #619eb6;
-    color: #fff;
-}
-
-.path-report-myfeedback .nav.nav-tabs {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.path-report-myfeedback .nav-tabs>li>a:focus {
-    background-color: #0070a8;
-}
-
-.path-report-myfeedback .nav-tabs>.active>a:focus,
-.path-report-myfeedback .nav-tabs>.active>a:hover {
-    border-bottom-color: transparent;
-    background-color: #fff;
-    border-color: #ddd;
-    border-bottom-color: #fff;
-}
-
 .path-report-myfeedback .userprofilebox {
     /*font-weight: bold;*/
 }
